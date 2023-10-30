@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jk/css/sing_up.css' %}">
+<!--    <script type="text/javascript" src="{% static 'jk/js/login.js' %}"></script>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><span></span></label>
+    <label for="active" class="close"></label>
+    <div class="wrapper">
+      <ul>
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'personal_area' %}">Personal Area</a></li>
+
+</ul>
+</div>
+
+<div class="content">
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" id="form1">
+                <div class="form-data" v-if="!submitted">
+                    <form method="POST" action="{% url 'sing_up' %}">
+                        {% csrf_token %}
+                        {{ registration_form.as_p }}
+                    <div class="forms-inputs mb-4"> <span>Username</span>
+                        <input type="text" name="username" placeholder="Username" value="{{ form.username.value }}">
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Apartment number</span>
+                        <input type="text" name="apartment_number" placeholder="Apartment number" value="{{ form.apartment_number.value }}">
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Email</span>
+                        <input type="email" name="email" placeholder="Email" value="{{ form.email.value }}">
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Phone</span>
+                        <input type="tel" name="phone" placeholder="Phone" value="{{ form.phone.value }}">
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Password</span>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Repeat password</span>
+                        <input type="password" name="repeat_password" placeholder="Repeat password">
+                    </div>
+                    <div class="mb-3">
+<!--                        <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Create user</button> -->
+                            <button type="submit">Create user</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

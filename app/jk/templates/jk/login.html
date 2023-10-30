@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jk/css/login.css' %}">
+    <script type="text/javascript" src="{% static 'jk/js/login.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><span></span></label>
+    <label for="active" class="close"></label>
+    <div class="wrapper">
+      <ul>
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'personal_area' %}">Personal Area</a></li>
+
+</ul>
+</div>
+<div class="content">
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" id="form1">
+                <div class="form-data" v-if="!submitted">
+                    <form method="post">
+                        {% csrf_token %}
+                    <div class="forms-inputs mb-4"> <span>Email or phone</span> <input autocomplete="off" type="text" v-model="email" v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}" v-on:blur="emailBlured = true">
+                        <div class="invalid-feedback">A valid email is required!</div>
+                    </div>
+                    <div class="forms-inputs mb-4"> <span>Password</span> <input autocomplete="off" type="password" v-model="password" v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true">
+                        <div class="invalid-feedback">Password must be 8 character!</div>
+                    </div>
+                    <div class="mb-3">
+
+                        <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Login</button>
+
+                    </div>
+                    <div class="mb-3">
+                        <form name="button" action="{% url 'sing_up' %}" target="_blank">
+                            <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100" ><a href="{% url 'sing_up' %}">Sing up</a></button>
+                        </form>
+                    </div>
+                    <div><a href="#">Forget password?</a></div>
+                        {{ form.errors }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
